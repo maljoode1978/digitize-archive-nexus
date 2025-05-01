@@ -1,18 +1,21 @@
-
-import { useState } from 'react';
+import { useState } from "react";
 import { ScanProvider } from "../contexts/ScanContext";
 import ScannerControls from "../components/ScannerControls";
 import ShelvingMetadata from "../components/ShelvingMetadata";
 import ScannedFilesList from "../components/ScannedFilesList";
 import ScanPreview from "../components/ScanPreview";
-import { toast } from '@/hooks/use-toast';
+import { toast } from "@/hooks/use-toast";
 
 const ScanPage = () => {
   const [showMaintenance, setShowMaintenance] = useState(false);
 
-  const toggleMaintenance = () => {
-    setShowMaintenance(!showMaintenance);
-  };
+  const maintenanceActions = [
+    "Feeder Cleaning Log",
+    "Roller Life Counter",
+    "Reset Counter",
+  ];
+
+  const toggleMaintenance = () => setShowMaintenance((prev) => !prev);
 
   const handleMaintenanceAction = (action: string) => {
     toast({
@@ -26,13 +29,16 @@ const ScanPage = () => {
     <ScanProvider>
       <div className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
-          {/* Scanner controls and preview - 70% width on large screens */}
+          {/* ─── Left (scanner controls + preview) ─── */}
           <div className="lg:col-span-7 space-y-6">
+            {/* Scanner controls */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4 md:mb-0">
                   Scanner Control (التحكم بالماسح)
                 </h2>
+
+                {/* Maintenance dropdown */}
                 <div className="relative">
                   <button
                     onClick={toggleMaintenance}
@@ -53,39 +59,30 @@ const ScanPage = () => {
                         showMaintenance ? "rotate-180" : ""
                       }`}
                     >
-                      <polyline points="6 9 12 15 18 9"></polyline>
+                      <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </button>
+
                   {showMaintenance && (
                     <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-md py-1 z-10">
-                      <button
-                        onClick={() =>
-                          handleMaintenanceAction("Feeder Cleaning Log")
-                        }
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 transition-colors"
-                      >
-                        Feeder Cleaning Log (سجل تنظيف المغذي)
-                      </button>
-                      <button
-                        onClick={() =>
-                          handleMaintenanceAction("Roller Life Counter")
-                        }
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 transition-colors"
-                      >
-                        Roller Life Counter (عداد عمر الأسطوانات)
-                      </button>
-                      <button
-                        onClick={() => handleMaintenanceAction("Reset Counter")}
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 transition-colors"
-                      >
-                        Reset Counter (إعادة تعيين العداد)
-                      </button>
+                      {maintenanceActions.map((label) => (
+                        <button
+                          key={label}
+                          onClick={() => handleMaintenanceAction(label)}
+                          className="w-full text-left px-4 py-2 hover:bg-gray-100 transition-colors"
+                        >
+                          {label}
+                        </button>
+                      ))}
                     </div>
                   )}
                 </div>
               </div>
+
               <ScannerControls />
             </div>
+
+            {/* Preview */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-4">
                 Preview (المعاينة)
@@ -94,7 +91,7 @@ const ScanPage = () => {
             </div>
           </div>
 
-          {/* Metadata and scanned files - 30% width on large screens */}
+          {/* ─── Right (metadata + scanned list) ─── */}
           <div className="lg:col-span-3 space-y-6">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-4">
@@ -102,6 +99,7 @@ const ScanPage = () => {
               </h3>
               <ShelvingMetadata />
             </div>
+
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-4">
                 Scanned Files (الملفات الممسوحة)
