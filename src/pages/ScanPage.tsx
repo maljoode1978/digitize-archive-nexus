@@ -5,20 +5,20 @@ import ShelvingMetadata from "../components/ShelvingMetadata";
 import ScannedFilesList from "../components/ScannedFilesList";
 import { toast } from '@/hooks/use-toast';
 
-//
-// Inlined preview logic so no more external placeholders!
-//
-const sampleImages = [
-  "assets/samples/sample_invoice_01.jpg",
-  "assets/samples/sample_invoice_02.jpg",
-  "assets/samples/sample_invoice_03.jpg",
-  "assets/samples/sample_invoice_04.jpg",
-  "assets/samples/sample_invoice_05.jpg",
-];
-
 const ScanPage = () => {
   const [showMaintenance, setShowMaintenance] = useState(false);
-  const [activeImage, setActiveImage] = useState(sampleImages[0]);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  // Base URL ("/digitize-archive-nexus/") on GH Pages
+  const base = import.meta.env.BASE_URL;
+
+  const sampleImages = [
+    "assets/samples/sample_invoice_01.jpg",
+    "assets/samples/sample_invoice_02.jpg",
+    "assets/samples/sample_invoice_03.jpg",
+    "assets/samples/sample_invoice_04.jpg",
+    "assets/samples/sample_invoice_05.jpg",
+  ].map((p) => `${base}${p}`);
 
   const maintenanceActions = [
     "Feeder Cleaning Log (سجل تنظيف المغذي)",
@@ -26,15 +26,9 @@ const ScanPage = () => {
     "Reset Counter (إعادة تعيين العداد)",
   ];
 
-  const toggleMaintenance = () => {
-    setShowMaintenance(!showMaintenance);
-  };
-
+  const toggleMaintenance = () => setShowMaintenance((f) => !f);
   const handleMaintenanceAction = (action: string) => {
-    toast({
-      title: "Maintenance Action",
-      description: `${action} selected`,
-    });
+    toast({ title: "Maintenance Action", description: `${action} selected` });
     setShowMaintenance(false);
   };
 
@@ -42,8 +36,7 @@ const ScanPage = () => {
     <ScanProvider>
       <div className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
-
-          {/* Scanner controls + inlined preview (70% width) */}
+          {/* Scanner controls & Preview (70%) */}
           <div className="lg:col-span-7 space-y-6">
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6">
@@ -73,7 +66,6 @@ const ScanPage = () => {
                       <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </button>
-
                   {showMaintenance && (
                     <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-md py-1 z-10">
                       {maintenanceActions.map((label) => (
@@ -92,33 +84,32 @@ const ScanPage = () => {
               <ScannerControls />
             </div>
 
-            {/* Inlined Preview Component */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-4">
                 Preview (المعاينة)
               </h3>
+              {/* Large preview */}
               <div className="w-full aspect-[4/3] bg-muted rounded-lg flex items-center justify-center mb-4">
                 <img
-                  src={activeImage}
+                  src={sampleImages[activeImageIndex]}
                   alt="Invoice preview"
                   className="max-h-full max-w-full object-contain"
                   loading="lazy"
                 />
               </div>
+              {/* Thumbnails */}
               <div className="flex gap-3">
-                {sampleImages.map((src) => (
+                {sampleImages.map((src, i) => (
                   <button
                     key={src}
-                    onClick={() => setActiveImage(src)}
+                    onClick={() => setActiveImageIndex(i)}
                     className={`border-2 rounded-md p-0.5 ${
-                      activeImage === src
-                        ? "border-sky-600"
-                        : "border-transparent"
+                      activeImageIndex === i ? "border-sky-600" : "border-transparent"
                     }`}
                   >
                     <img
                       src={src}
-                      alt="Thumbnail"
+                      alt={`Thumb ${i + 1}`}
                       className="h-20 w-28 object-cover rounded"
                       loading="lazy"
                     />
@@ -128,7 +119,7 @@ const ScanPage = () => {
             </div>
           </div>
 
-          {/* Metadata & Scanned files (30% width) */}
+          {/* Metadata & Files List (30%) */}
           <div className="lg:col-span-3 space-y-6">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-4">
