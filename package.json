@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-
   "homepage": "https://maljoode1978.github.io/digitize-archive-nexus/",
 
   "scripts": {
@@ -12,7 +11,9 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+
+    "copy404": "shx cp dist/index.html dist/404.html",
+    "predeploy": "npm run build && npm run copy404",
     "deploy": "gh-pages -d dist"
   },
 
@@ -83,6 +84,7 @@
     "globals": "^15.9.0",
     "lovable-tagger": "^1.1.7",
     "postcss": "^8.4.47",
+    "shx": "^0.4.0",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
