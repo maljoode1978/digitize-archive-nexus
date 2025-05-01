@@ -1,0 +1,74 @@
+
+{
+  "scanners": [
+    "Fujitsu fi-6670",
+    "Brother ADS-4900W",
+    "Fujitsu fi-7160"
+  ],
+  "scannedFiles": [
+    {
+      "id": "1",
+      "fileName": "sample_invoice_01.jpg",
+      "timestamp": "2025-04-30T14:22:41Z",
+      "rack": 1,
+      "shelf": 2,
+      "box": 3,
+      "folder": 1,
+      "shelfCode": "R1-S2-B3-F1",
+      "status": "Pending Review"
+    },
+    {
+      "id": "2",
+      "fileName": "sample_invoice_02.jpg",
+      "timestamp": "2025-04-30T14:23:15Z",
+      "rack": 1,
+      "shelf": 2,
+      "box": 3,
+      "folder": 1,
+      "shelfCode": "R1-S2-B3-F1",
+      "status": "Pending Review"
+    },
+    {
+      "id": "3",
+      "fileName": "sample_invoice_03.jpg",
+      "timestamp": "2025-04-30T14:24:35Z",
+      "rack": 1,
+      "shelf": 2,
+      "box": 3,
+      "folder": 2,
+      "shelfCode": "R1-S2-B3-F2",
+      "status": "Pending Review"
+    },
+    {
+      "id": "4",
+      "fileName": "sample_invoice_04.jpg",
+      "timestamp": "2025-04-30T14:25:22Z",
+      "rack": 1,
+      "shelf": 3,
+      "box": 1,
+      "folder": 1,
+      "shelfCode": "R1-S3-B1-F1",
+      "status": "Pending Review"
+    },
+    {
+      "id": "5",
+      "fileName": "sample_invoice_05.jpg",
+      "timestamp": "2025-04-30T14:26:10Z",
+      "rack": 1,
+      "shelf": 3,
+      "box": 1,
+      "folder": 1,
+      "shelfCode": "R1-S3-B1-F1",
+      "status": "Pending Review"
+    }
+  ],
+  "vendors": [
+    "Global Tech Solutions",
+    "EcoSystems Inc.",
+    "Rapid Supply Co.",
+    "Office Depot",
+    "Tech Innovations Ltd.",
+    "Paper & More",
+    "Digital Systems Corp."
+  ]
+}

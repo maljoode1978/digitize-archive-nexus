@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -25,12 +26,16 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
+					DEFAULT: '#00637c', // teal primary color
 					foreground: 'hsl(var(--primary-foreground))'
 				},
 				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
+					DEFAULT: '#f8f9fa', // light secondary color
 					foreground: 'hsl(var(--secondary-foreground))'
+				},
+				accent: {
+					DEFAULT: '#ffaa2b', // amber accent color
+					foreground: 'hsl(var(--accent-foreground))'
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
@@ -39,10 +44,6 @@ export default {
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
 					foreground: 'hsl(var(--muted-foreground))'
-				},
-				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -62,6 +63,9 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
+			},
+			fontFamily: {
+				sans: ['Inter', 'system-ui', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +88,16 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'progress': {
+					'0%': { width: '0%' },
+					'100%': { width: '100%' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'progress': 'progress 2s ease-in-out'
 			}
 		}
 	},
