@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
 
-  "homepage": "https://maljoode1978.github.io/digitize-archive-nexus/",      /* NEW */
+  "homepage": "https://maljoode1978.github.io/digitize-archive-nexus/",
 
   "scripts": {
     "dev": "vite",
@@ -12,9 +12,8 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-
-    "predeploy": "npm run build",                 /* NEW */
-    "deploy": "gh-pages -d dist"                  /* NEW */
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
 
   "dependencies": {
