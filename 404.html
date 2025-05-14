@@ -5,6 +5,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digitization Hub</title>
+  <script>
+    (function() {
+      // Retrieve the redirect location from sessionStorage
+      var redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect != location.href) {
+        // Preserve the url fragment (hash)
+        var hash = location.hash;
+        history.replaceState(null, null, redirect.split('#')[0]);
+        location.hash = hash;
+      }
+    })();
+  </script>
   <meta name="description" content="High-Speed Scanner — Digitization & Archiving Interface" />
   <meta name="author" content="Digitization Hub" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
