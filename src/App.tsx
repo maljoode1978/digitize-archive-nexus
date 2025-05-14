@@ -7,6 +7,8 @@ import ScanPage from "./pages/ScanPage";
 import DataEntryPage from "./pages/DataEntryPage";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
+import UsersPage from "./pages/UsersPage";
+import DashboardPage from "./pages/DashboardPage";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/" element={<Layout />}>
             <Route path="/scan" element={<ScanPage />} />
             <Route path="/data-entry" element={<DataEntryPage />} />
+            <Route path="/users" element={<UsersPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

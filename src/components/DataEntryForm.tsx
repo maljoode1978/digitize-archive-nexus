@@ -46,19 +46,20 @@ const DataEntryForm = ({
   const [filteredVendors, setFilteredVendors] = useState<string[]>([]);
 
   useEffect(() => {
-    // Load vendors from mock data
-    const loadVendors = async () => {
-      try {
-        const response = await fetch('/mock-scans.json');
-        const data = await response.json();
-        setVendors(data.vendors || []);
-      } catch (error) {
-        console.error('Failed to load vendors:', error);
-      }
-    };
+  const loadVendors = async () => {
+    try {
+      const base = import.meta.env.BASE_URL;
+      const response = await fetch(`${base}mock-scans.json`);  // ✅ FIXED (added base URL)
+      const data = await response.json();
+      setVendors(data.vendors || []);
+    } catch (error) {
+      console.error('Failed to load vendors:', error);
+    }
+  };
 
-    loadVendors();
-  }, []);
+  loadVendors();
+}, []);
+
 
   useEffect(() => {
     if (formData.vendor) {

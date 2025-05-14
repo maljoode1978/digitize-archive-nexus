@@ -1,5 +1,6 @@
 // src/components/Layout.tsx
 import { Outlet, Link, useLocation } from "react-router-dom";
+import tawasulLogo from "@/assets/samples/tawasul.png";
 
 const Layout = () => {
   const location = useLocation();
@@ -15,11 +16,11 @@ const Layout = () => {
           {/* Logo + Title */}
           <div className="flex items-center mb-4 sm:mb-0">
             <img
-              src={`${base}assets/samples/tawasul.png`}
+              src={tawasulLogo}  // ✅ ✅ ✅ FIXED (use imported vite path)  // ✅ FIXED (added slash / after base)
               alt="Tawasul Logo"
               className="h-12 w-auto mr-3 logo"
             />
-            <span className="text-xl font-bold">Digitization Hub</span>
+            <span className="text-xl font-bold">Digitization Hub - Proof of Concept</span>
           </div>
 
           {/* Navigation */}

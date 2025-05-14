@@ -56,20 +56,22 @@ export const ScanProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Load mock data
   useEffect(() => {
-    const loadMockData = async () => {
-      try {
-        const response = await fetch('/mock-scans.json');
-        const data = await response.json();
-        setScanners(data.scanners);
-        setSelectedScanner(data.scanners[0]);
-        setScannedFiles(data.scannedFiles || []);
-      } catch (error) {
-        console.error('Failed to load mock data:', error);
-      }
-    };
+  const loadMockData = async () => {
+    try {
+      const base = import.meta.env.BASE_URL;
+      const response = await fetch(`${base}mock-scans.json`);  // ✅ FIXED (added base URL)
+      const data = await response.json();
+      setScanners(data.scanners);
+      setSelectedScanner(data.scanners[0]);
+      setScannedFiles(data.scannedFiles || []);
+    } catch (error) {
+      console.error('Failed to load mock data:', error);
+    }
+  };
 
-    loadMockData();
-  }, []);
+  loadMockData();
+}, []);
+
 
   const generateShelfCode = (r: number, s: number, b: number, f: number) => {
     return `R${r}-S${s}-B${b}-F${f}`;
